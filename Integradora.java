@@ -1,18 +1,20 @@
 import java.util.Scanner;
 /** 
- *name: Integradora
- *Description: this code can leave result whit input varibles ask by system
- *Pre: Ready to inscribe in the system the user in one route, and asking other parameters but realize the activity
- *Pos: The weather condition for the activity was verified
- *@param name name of the user. name != int && name != float
+ *name: main
+ *Description: This code registers the user to a route and will inform of the requirements for the activity.
+ *Pre: Ready to inscribe in the system the user in one route, and asking other parameters but realize the activity.
+ *Pos: The conditions for the activity have been recorded in the activity.
+ *@param name Name of the user. name != int && name != float
  *@param cedula ID of the user. cedula != null && cedula != "".
- *@param ruta got the choose the user
- *@param participantes number to the people participate in the activity
- *@param guias number of guides in the activity
- *@param grados climate temperature in degrees Celsius
- *@param humedad climate humidity 
- *@param daMeteo deposit of the results of the subroutines
- *@param nCamiones deposit of the results of the subroutines
+ *@param obtenerRegalo Deposit of the results of the subroutines. Designates or not a free entry.
+ *@param ruta Got the choose the user. ruta != null && ruta !="".
+ *@param rutas Deposit of the results of the subroutines. route information.
+ *@param participantes Number to the people participate in the activity. participantes != null && participantes !="".
+ *@param guias Number of guides in the activity. guias != null && guias !="".
+ *@param grados Climate temperature in degrees Celsius. grados != null && grados !="".
+ *@param humedad Climate humidity. humedad != null && humedad !="".
+ *@param daMeteo Deposit of the results of the subroutines. Report the weather condition
+ *@param nCamiones Deposit of the results of the subroutines. Number of trucks needed
  */
 public class Integradora{
     public static void main (String[] args){
@@ -23,6 +25,9 @@ public class Integradora{
         System.out.println("Por favor, dijite su cedula.");
             int cedula=sc.nextInt();
         System.out.println("¡Bienvenido, "+name);
+        
+        obtenerRegalo(name);
+
         System.out.println("¿Que ruta registraras el dia de hoy?");
         System.out.println("digite el numero de la ruta a elegir.");
         System.out.println("[1] Farallones.");
@@ -47,8 +52,16 @@ public class Integradora{
         System.out.print("Se necesitan "+nCamiones);
         System.out.println(" camiones para llevar a cabo la actividad");
         
-
     }
+    /**
+     * name: [static] datosMeteorologicos
+     * description: The weather condition is calculated based on humidity and temperature to carry out the activity.
+     * pre: The comparison of meteorological data with established conditions begins.
+     * pos: The message reporting the weather condition is recorded in the output variable and returned to the main.
+     * @param salida Information message about the weather for the activity.
+     * @param hum Humidity percentage of the current climate.
+     * @param gr Degrees Celsius of the current climate
+     */
     public static String datosMeteorologicos(double gr, int hum){
         String salida;
         salida="El clima no es favorable para realizar la actividad";
@@ -64,6 +77,15 @@ public class Integradora{
         return salida;
     }
 
+    /**
+     * name: [static] numCamiones
+     * description: Calculate the number of trucks needed to transport all guides and participants.
+     * pre: The calculation of the buses has started.
+     * pos: A value is generated and entered into the output variable to be printed in the main.
+     * @param salida2 Return variable with the required number of buses.
+     * @param gui Parameter with the number of guides.
+     * @param par Parameter with the number of participants.
+     */
     public static int numCamiones(int par, int gui){
         int salida2;
         int sum=par+gui;
@@ -73,6 +95,17 @@ public class Integradora{
         return salida2;
     }
 
+    /**
+     * name: [void] rutas
+     * description: The system compares the user's route selection with the conditions to release the corresponding preset route information.
+     * pre: The comparison of the conditionals with the parameter begins.
+     * pos: Depending on the condition, the corresponding message is printed.
+     * @param rut Parameter with the number of the selected route.
+     * @param salida3 Return value with the route information.
+     * @param uno1 Route one information.
+     * @param dos2 Route two information.
+     * @param tres3 Route three information.
+     */
     public static void rutas(int rut){
       String salida3;
       String uno1="¡Exelente! La Ruta de los Farallones tiene como punto de encuentro Calle 16-Universidad del Valle iniciando a las 6:40 am, y termina a las 4:00 pm";
@@ -94,8 +127,26 @@ public class Integradora{
     System.out.println(salida3);
     }
 
-    public static int regalo(String name){
-        string salida4;
-        
+    /**
+     * name: [void] obtenerRegalo
+     * description: If the first letter of the username is a vowel, you will be given a free ticket to COP16.
+     * pre: The first letter of the name is enclosed to evaluate it in the condition.
+     * pos: The output message is printed.
+     * @param nombre Parameter with the user name.
+     * @param primera_letra Store the first letter as a char.
+     * @param palabra Store the first letter as String.
+     */
+    public static void obtenerRegalo(String nombre){
+        char primera_letra= nombre.charAt(0);
+        String palabra = primera_letra +"";
+        if (palabra.equals("a") || palabra.equals("e") || palabra.equals("i") || palabra.equals("o") || palabra.equals("u")){
+            System.out.println("Comuniquese al número 1800456789 para obtener una entrada gratuita a una conferencia del cop16");
+        }
+        else if(palabra.equals("A") || palabra.equals("E") || palabra.equals("I") || palabra.equals("O") || palabra.equals("U")){
+            System.out.println("Comuniquese al número 1800456789 para obtener una entrada gratuita a una conferencia del cop16");
+        }
+        else{
+            System.out.println("Su nombre no empieza por vocal"+palabra);
+        }
     }
 }
